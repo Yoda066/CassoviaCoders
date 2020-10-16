@@ -2,4 +2,14 @@
     <string name="app_name">CassoviaCoders</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="choose_location">Vyberte mesto</string>
+
+    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
+    <string name="wind">Wind</string>
+    <string name="sunset">Sunset</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="daytime">Daytime</string>
+    <string name="location">Location</string>
+    <string name="location_search_hint">Search city...</string>
 </resources>

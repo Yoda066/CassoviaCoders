@@ -1,56 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#0099cc"
-    tools:context=".FullscreenActivity">
 
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_background"
-        />
-
-    <TextView
-        android:id="@+id/fullscreen_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:keepScreenOn="true"
-        android:text="@string/dummy_content"
-        android:textColor="#33b5e5"
-        android:textSize="50sp"
-        android:textStyle="bold" />
-
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        tools:context=".FullscreenActivity">
 
-        <LinearLayout
-            android:id="@+id/fullscreen_content_controls"
-            style="?metaButtonBarStyle"
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent">
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_background" />
 
-            <Button
-                android:id="@+id/dummy_button"
-                style="?metaButtonBarButtonStyle"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/rounded_background">
+
+            <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/dummy_button" />
+                android:layout_height="0dp"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/padding_standard"
+                android:paddingEnd="@dimen/padding_standard"
+                app:layout_constraintBottom_toBottomOf="@+id/location_button"
+                app:layout_constraintEnd_toStartOf="@+id/location_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/location_button"
+                tools:text="Wednesday, 08 Oct 2020 | 4:30PM" />
 
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/location_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_background_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:minHeight="60dp"
+                    android:paddingStart="@dimen/padding_standard"
+                    android:textColor="@color/location_text"
+                    android:textStyle="bold"
+                    tools:ignore="RtlSymmetry"
+                    tools:text="Košice, Slovakia" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/padding_standard"
+                    android:paddingEnd="@dimen/padding_standard"
+                    android:src="@drawable/ic_facebook_places" />
+            </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+
+                android:divider="?android:attr/dividerHorizontal"
+                app:layout_constraintTop_toBottomOf="@+id/location_button">
+
+                <TableRow>
+                    <include
+                        layout="@layout/state_item"
+                        app:iconSource='@{@drawable/ic_humidity}'
+                        app:text='@{@string/humidity}' />
+                    <include
+                        layout="@layout/state_item"
+                        app:iconSource='@{@drawable/ic_barometer}'
+                        app:text='@{@string/pressure}'/>
+                    <include
+                        layout="@layout/state_item"
+                        app:iconSource='@{@drawable/ic_wind}'
+                        app:text='@{@string/wind}'/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="15dp">
+                    <include
+                        layout="@layout/state_item"
+                        app:iconSource='@{@drawable/ic_sunrise}'
+                        app:text='@{@string/sunrise}' />
+                    <include
+                        layout="@layout/state_item"
+                        app:iconSource='@{@drawable/ic_sunset}'
+                        app:text='@{@string/sunset}'/>
+                    <include
+                        layout="@layout/state_item"
+                        app:iconSource='@{@drawable/ic_sand_clock}'
+                        app:text='@{@string/daytime}'/>
+                </TableRow>
+            </TableLayout>
+
+            <include
+                android:id="@+id/day1"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/table"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/day2"
+                android:layout_margin="10dp"
+                layout="@layout/day_prediction"
+                app:iconSource='@{@drawable/ic_weather_state_cloudy}'
+                app:text='@{"THU, 09"}' />
+
+            <include
+                android:id="@+id/day2"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/day1"
+                app:layout_constraintEnd_toStartOf="@+id/day3"
+                android:layout_margin="10dp"
+                layout="@layout/day_prediction"
+                app:layout_constraintTop_toBottomOf="@+id/table"
+                app:iconSource='@{@drawable/ic_weather_state_sunny}'
+                app:text='@{"THU, 09"}' />
+
+            <include
+                android:id="@+id/day3"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/day2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/table"
+                layout="@layout/day_prediction"
+                android:layout_margin="10dp"
+                app:iconSource='@{@drawable/ic_weather_state_hazy}'
+                app:text='@{"THU, 09"}' />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </FrameLayout>
 
-</FrameLayout>
+</layout>

@@ -5,4 +5,12 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="black_overlay">#66000000</color>
+
+
+    <color name="background">#FFFFFF</color>
+    <color name="background_button">#ECF8FE</color>
+    <color name="location_text">#29ABED</color>
+    <color name="searchBarBackground">#F3F3F3</color>
+
+
 </resources>

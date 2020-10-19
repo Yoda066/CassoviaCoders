@@ -2,12 +2,12 @@ package com.example.cassoviacoders
 
 class LocationsRepo {
 
-    fun getDefailtLocations() : List<Location> = listOf(
-        Location("Bratislava", 1),
-        Location("Humenné", 1),
-        Location("Koromľa", 1),
-        Location("Košice", 1),
-        Location("Michalovce", 1),
-        Location("sobrance", 1)
+    fun getDefaultLocations() : List<Location> = listOf(
+        Location( 1, "Bratislava"),
+        Location( 2, "Humenné"),
+        Location( 3, "Koromľa"),
+        Location( 4, "Košice"),
+        Location( 5, "Michalovce"),
+        Location( 6, "sobrance")
     )
 }

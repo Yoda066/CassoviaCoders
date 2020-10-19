@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/location_choose">
+
+    <fragment
+        android:id="@+id/location_choose"
+        android:name="com.example.cassoviacoders.location_choose.LocationChooseFragment"
+        android:label="locationChooseFragment"
+        tools:layout="@layout/fragment_location_choose">
+        <action
+            android:id="@+id/action_configFragment_to_activationFragment"
+            app:destination="@id/location_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/location_detail"
+        android:name="com.example.cassoviacoders.LocationDetailFragment"
+        android:label="ActivationFragment"
+        tools:layout="@layout/fragment_location_detail">
+        <action
+            android:id="@+id/action_activationFragment_to_configFragment"
+            app:destination="@id/location_choose" />
+    </fragment>
+
+
+</navigation>

@@ -1,6 +1,9 @@
 package com.example.cassoviacoders
 
 data class Location(
+    val id: Int,
     val title: String,
-    val id: Int
-)
+    val state: String = "Slovakia"
+) {
+    fun getFormatedTitle() = """$title, $state"""
+}

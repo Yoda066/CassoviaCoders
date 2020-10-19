@@ -5,38 +5,34 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
-            name="location"
-            type="com.example.cassoviacoders.Location" />
-
-        <variable
-            name="viewmodel"
-            type="com.example.cassoviacoders.MainActivityViewModel" />
+            name="value"
+            type="String"/>
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="@{() -> viewmodel.switchToLocationDetail(location)}"
-        android:layout_marginBottom="5dp">
+        android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/valueText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{location.title}"
-            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Bratislava" />
+            tools:text="35"
+            android:text="@{value}"
+            />
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="35°C" />
+            android:text="°C"
+            app:layout_constraintStart_toEndOf="@+id/valueText"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/location_choose"
-        android:name="com.example.cassoviacoders.location_choose.LocationChooseFragment"
+        android:name="com.example.cassoviacoders.ui.location_choose.LocationChooseFragment"
         android:label="locationChooseFragment"
         tools:layout="@layout/fragment_location_choose">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/location_detail"
-        android:name="com.example.cassoviacoders.LocationDetailFragment"
+        android:name="com.example.cassoviacoders.ui.location_detail.LocationDetailFragment"
         android:label="ActivationFragment"
         tools:layout="@layout/fragment_location_detail">
         <action

@@ -5,7 +5,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.cassoviacoders.MainActivityViewModel" />
+            type="com.example.cassoviacoders.ui.MainActivityViewModel" />
 
     </data>
 

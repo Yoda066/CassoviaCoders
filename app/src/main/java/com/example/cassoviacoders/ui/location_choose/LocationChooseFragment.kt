@@ -1,4 +1,4 @@
-package com.example.cassoviacoders.location_choose
+package com.example.cassoviacoders.ui.location_choose
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import com.example.cassoviacoders.MainActivityViewModel
+import com.example.cassoviacoders.ui.MainActivityViewModel
 import com.example.cassoviacoders.databinding.FragmentLocationChooseBinding
 
 class LocationChooseFragment : Fragment() {

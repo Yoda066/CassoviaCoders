@@ -8,6 +8,9 @@
             name="valueText"
             type="java.lang.String" />
         <variable
+            name="unit"
+            type="java.lang.String" />
+        <variable
             name="iconSource"
             type="android.graphics.drawable.Drawable" />
 
@@ -24,7 +27,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:src='@{iconSource, default = @drawable/ic_barometer}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,13 +39,15 @@
             android:layout_marginTop="5dp"
             android:textColor="@android:color/black"
             android:textSize="20sp"
-            android:text="@{valueText}"
+            android:gravity="center"
+            android:text='@{valueText + unit}'
             tools:text="1.007Mbar" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{text}"
+            android:gravity="center"
             tools:text="humidity" />
 
     </LinearLayout>

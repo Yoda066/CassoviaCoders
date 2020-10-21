@@ -12,4 +12,5 @@
     <string name="daytime">Daytime</string>
     <string name="location">Location</string>
     <string name="location_search_hint"><i>Search city...</i></string>
+    <string name="celsiusSymbol">°C</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.cassoviacoders
+package com.example.cassoviacoders.ui.location_detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.cassoviacoders.ui.MainActivityViewModel
 import com.example.cassoviacoders.databinding.FragmentLocationDetailBinding
 
 class LocationDetailFragment : Fragment() {
@@ -22,5 +23,6 @@ class LocationDetailFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             viewmodel = activityViewModel
         }.root
+
     }
 }

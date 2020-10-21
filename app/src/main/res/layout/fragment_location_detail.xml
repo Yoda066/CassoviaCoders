@@ -8,13 +8,15 @@
 
         <variable
             name="viewmodel"
-            type="com.example.cassoviacoders.MainActivityViewModel" />
+            type="com.example.cassoviacoders.ui.MainActivityViewModel" />
+
+        <import type="com.example.cassoviacoders.utils.ViewUtil" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".FullscreenActivity">
+        tools:context=".MainActivity">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
@@ -35,6 +37,7 @@
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/padding_standard"
                 android:paddingEnd="@dimen/padding_standard"
+                android:text='@{ViewUtil.getMainDateTime(viewmodel.currentWeather.dateTime)}'
                 app:layout_constraintBottom_toBottomOf="@+id/location_button"
                 app:layout_constraintEnd_toStartOf="@+id/location_button"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,59 +83,66 @@
                 app:layout_constraintTop_toBottomOf="@+id/location_button">
 
                 <TableRow>
+
                     <include
                         android:id="@+id/mainState"
                         layout="@layout/state_item"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        app:iconSource='@{@drawable/ic_weather_state_sunny}'
+                        app:layout_constraintEnd_toStartOf="@+id/mainDegree"
                         app:layout_constraintHorizontal_weight="1"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/mainDegree"
-                        app:iconSource='@{@drawable/ic_weather_state_sunny}'
-                        app:valueText='@{"sunny"}' />
+                        app:unit='@{""}'
+                        app:valueText='@{ViewUtil.getWeatherDescription(viewmodel.currentWeather.weather)}' />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_height="match_parent"
                         android:layout_width="match_parent"
-                        >
+                        android:layout_height="match_parent">
+
                         <TextView
                             android:id="@+id/mainDegree"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:gravity="center|top"
-                            android:text='@{"35"}'
-                            android:textSize="50sp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:textColor="@android:color/black"
+                            android:textSize="50sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:rounded='@{viewmodel.currentWeather.temp_mean}'
                             tools:text="33" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintTop_toTopOf="@+id/mainDegree"
+                            android:text="@string/celsiusSymbol"
+                            android:textSize="25sp"
                             app:layout_constraintStart_toEndOf="@+id/mainDegree"
-                            android:text="°C"
-                            android:textSize="25sp" />
+                            app:layout_constraintTop_toTopOf="@+id/mainDegree" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/rightValues"
-                        android:layout_height="match_parent"
                         android:layout_width="0dp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_height="match_parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="1"
                         app:layout_constraintStart_toEndOf="@+id/mainDegree"
-                        app:layout_constraintHorizontal_weight="1">
+                        app:layout_constraintTop_toTopOf="parent">
+
                         <TextView
                             android:id="@+id/uppervalue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:layout_constraintVertical_weight="1"
-                            app:layout_constraintTop_toTopOf="parent"
                             android:gravity="center"
-                            app:degreeValue='@{"35"}'
+                            android:textSize="20sp"
+                            app:degreeValue='@{viewmodel.currentWeather.temp_max}'
                             app:layout_constraintBottom_toTopOf="@+id/bottomvalue"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_weight="1"
                             tools:text="35" />
 
                         <TextView
@@ -140,32 +150,38 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            app:layout_constraintVertical_weight="1"
+                            android:textSize="20sp"
+                            app:degreeValue='@{viewmodel.currentWeather.temp_min}'
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/uppervalue"
-                            app:degreeValue='@{"35"}'
+                            app:layout_constraintVertical_weight="1"
                             tools:text="35" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </TableRow>
 
-                <TableRow
-                    android:layout_marginTop="@dimen/padding_standard"
-                    >
+                <TableRow android:layout_marginTop="@dimen/padding_standard">
+
                     <include
                         layout="@layout/state_item"
                         app:iconSource='@{@drawable/ic_humidity}'
-                        app:text='@{@string/humidity}' />
+                        app:text='@{@string/humidity}'
+                        app:unit='@{"%"}'
+                        app:valueText="@{viewmodel.currentWeather.humidity.toString()}" />
 
                     <include
                         layout="@layout/state_item"
                         app:iconSource='@{@drawable/ic_barometer}'
-                        app:text='@{@string/pressure}' />
+                        app:text='@{@string/pressure}'
+                        app:unit='@{"mBar"}'
+                        app:valueText="@{ViewUtil.formatPressure(viewmodel.currentWeather.pressure)}" />
 
                     <include
                         layout="@layout/state_item"
                         app:iconSource='@{@drawable/ic_wind}'
-                        app:text='@{@string/wind}' />
+                        app:text='@{@string/wind}'
+                        app:unit='@{"km/h"}'
+                        app:valueText="@{ViewUtil.convertToKilometresPerHour(viewmodel.currentWeather.wind_speed)}" />
                 </TableRow>
 
                 <TableRow android:layout_marginTop="15dp">
@@ -173,17 +189,23 @@
                     <include
                         layout="@layout/state_item"
                         app:iconSource='@{@drawable/ic_sunrise}'
-                        app:text='@{@string/sunrise}' />
+                        app:text='@{@string/sunrise}'
+                        app:unit='@{"AM"}'
+                        app:valueText="@{ViewUtil.getNiceTime(viewmodel.currentWeather.sunrise)}" />
 
                     <include
                         layout="@layout/state_item"
                         app:iconSource='@{@drawable/ic_sunset}'
-                        app:text='@{@string/sunset}' />
+                        app:text='@{@string/sunset}'
+                        app:unit='@{"PM"}'
+                        app:valueText="@{ViewUtil.getNiceTime(viewmodel.currentWeather.sunset)}" />
 
                     <include
                         layout="@layout/state_item"
                         app:iconSource='@{@drawable/ic_sand_clock}'
-                        app:text='@{@string/daytime}' />
+                        app:text='@{@string/daytime}'
+                        app:unit='@{""}'
+                        app:valueText='@{ViewUtil.getDayTime(viewmodel.currentWeather)}' />
                 </TableRow>
             </TableLayout>
 
@@ -193,13 +215,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:layout_marginBottom="@dimen/padding_standard"
                 app:iconSource='@{@drawable/ic_weather_state_cloudy}'
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/day2"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/table"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="@dimen/padding_standard"
                 app:text='@{"THU, 09"}' />
 
             <include
@@ -208,13 +230,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:layout_marginBottom="@dimen/padding_standard"
                 app:iconSource='@{@drawable/ic_weather_state_sunny}'
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/day3"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/day1"
                 app:layout_constraintTop_toBottomOf="@+id/table"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="@dimen/padding_standard"
                 app:text='@{"THU, 09"}' />
 
             <include
@@ -223,13 +245,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:layout_marginBottom="@dimen/padding_standard"
                 app:iconSource='@{@drawable/ic_weather_state_hazy}'
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/day2"
                 app:layout_constraintTop_toBottomOf="@+id/table"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="@dimen/padding_standard"
                 app:text='@{"THU, 09"}' />
 
 

@@ -1,12 +1,12 @@
-package com.example.cassoviacoders.location_choose
+package com.example.cassoviacoders.ui.location_choose
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cassoviacoders.Location
-import com.example.cassoviacoders.MainActivityViewModel
+import com.example.cassoviacoders.db.Location
+import com.example.cassoviacoders.ui.MainActivityViewModel
 import com.example.cassoviacoders.databinding.LocationSearchItemBinding
 
 class LocationAdapter(val viewModel: MainActivityViewModel) : ListAdapter<Location, LocationViewHolder>(LocationDiff) {
@@ -34,7 +34,7 @@ class LocationViewHolder(
 
 object LocationDiff : DiffUtil.ItemCallback<Location>() {
     override fun areItemsTheSame(oldItem: Location, newItem: Location): Boolean =
-        (oldItem.id == newItem.id)
+        (oldItem.locId == newItem.locId)
 
     override fun areContentsTheSame(oldItem: Location, newItem: Location): Boolean =
         (oldItem == newItem)

@@ -8,11 +8,11 @@
 
         <variable
             name="location"
-            type="com.example.cassoviacoders.Location" />
+            type="com.example.cassoviacoders.db.Location" />
 
         <variable
             name="viewmodel"
-            type="com.example.cassoviacoders.MainActivityViewModel" />
+            type="com.example.cassoviacoders.ui.MainActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

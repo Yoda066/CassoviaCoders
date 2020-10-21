@@ -2,10 +2,7 @@ package com.example.cassoviacoders.db
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.Ignore
-import com.example.cassoviacoders.db.Location
 import com.example.cassoviacoders.retrofit.Weather
-import com.google.gson.annotations.SerializedName
 import java.util.*
 
 @Entity(
@@ -18,7 +15,7 @@ import java.util.*
         )],
     primaryKeys = ["locId", "dayId"]
 )
-data class MyDailyWeather(
+data class DailyWeather(
     //id lokacie predpovede
     var locId: Long,
 

@@ -8,7 +8,7 @@
 
         <variable
             name="location"
-            type="com.example.cassoviacoders.db.Location" />
+            type="com.example.cassoviacoders.db.LocationPojo" />
 
         <variable
             name="viewmodel"
@@ -19,13 +19,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{() -> viewmodel.switchToLocationDetail(location)}"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="@dimen/spacing_small">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{location.title}"
-            android:textSize="25sp"
+            android:text="@{location.location.title}"
+            android:textSize="@dimen/text_size_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Bratislava" />
@@ -33,9 +33,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:degreeValue='@{location.lastTemp}'
             tools:text="35°C" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

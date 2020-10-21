@@ -1,9 +1,11 @@
 package com.example.cassoviacoders.utils
 
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.example.cassoviacoders.R
 import com.example.cassoviacoders.db.Location
-import java.util.*
+import com.example.cassoviacoders.retrofit.Weather
 import kotlin.math.roundToInt
 
 @BindingAdapter("android:text")
@@ -21,7 +23,17 @@ fun TextView.setRoundedValue(value: Double?) {
     text = value?.roundToInt()?.toString() ?: ""
 }
 
-@BindingAdapter("niceDate")
-fun TextView.setValue(value: Date?) {
-    text = value?.toString() ?: "???"
+@BindingAdapter("android:src")
+fun setImageResourceByState(imageView: ImageView, weather: Weather?) {
+    weather ?: return
+
+    val iconRes =
+        if (weather.id == 800) R.drawable.ic_weather_state_sunny else {
+            when (weather.id / 100) {
+                3, 7 -> R.drawable.ic_weather_state_hazy //drizzle / atmosfere
+                else -> R.drawable.ic_weather_state_cloudy //thunderstorm ,rain ,snow ,clouds
+            }
+        }
+
+    imageView.setImageResource(iconRes)
 }

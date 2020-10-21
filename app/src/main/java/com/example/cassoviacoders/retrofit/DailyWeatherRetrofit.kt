@@ -3,6 +3,7 @@ package com.example.cassoviacoders.retrofit
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
+//Trieda sluziaca na parsovanie daily predpovede pre jednotlivy den
 data class DailyWeatherRetrofit(
     @field:SerializedName("dt")
     val dt: Long,

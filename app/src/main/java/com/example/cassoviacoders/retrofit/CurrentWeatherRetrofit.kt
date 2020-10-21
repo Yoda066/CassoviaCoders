@@ -3,6 +3,7 @@ package com.example.cassoviacoders.retrofit
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
+//Trieda ktora parsuje vysledok aktualnej predpovede.
 data class CurrentWeatherRetrofit(
     @field:SerializedName("dt")
     val dt: Long,

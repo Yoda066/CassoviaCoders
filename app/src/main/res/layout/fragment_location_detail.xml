@@ -35,8 +35,8 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:gravity="center_vertical"
-                android:paddingStart="@dimen/padding_standard"
-                android:paddingEnd="@dimen/padding_standard"
+                android:paddingStart="@dimen/spacing_standard"
+                android:paddingEnd="@dimen/spacing_standard"
                 android:text='@{ViewUtil.getMainDateTime(viewmodel.currentWeather.dateTime)}'
                 app:layout_constraintBottom_toBottomOf="@+id/location_button"
                 app:layout_constraintEnd_toStartOf="@+id/location_button"
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:minHeight="60dp"
-                    android:paddingStart="@dimen/padding_standard"
+                    android:paddingStart="@dimen/spacing_standard"
                     android:text="@{viewmodel.actualLocation}"
                     android:textColor="@color/location_text"
                     android:textStyle="bold"
@@ -68,8 +68,8 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingStart="@dimen/padding_standard"
-                    android:paddingEnd="@dimen/padding_standard"
+                    android:paddingStart="@dimen/spacing_standard"
+                    android:paddingEnd="@dimen/spacing_standard"
                     android:src="@drawable/ic_facebook_places" />
             </LinearLayout>
 
@@ -77,24 +77,34 @@
                 android:id="@+id/table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/spacing_standard"
                 android:divider="?android:attr/dividerHorizontal"
                 android:stretchColumns="*"
                 app:layout_constraintTop_toBottomOf="@+id/location_button">
 
                 <TableRow>
 
-                    <include
-                        android:id="@+id/mainState"
-                        layout="@layout/state_item"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:iconSource='@{@drawable/ic_weather_state_sunny}'
-                        app:layout_constraintEnd_toStartOf="@+id/mainDegree"
+                        android:layout_height="match_parent"
                         app:layout_constraintHorizontal_weight="1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:unit='@{""}'
-                        app:valueText='@{ViewUtil.getWeatherDescription(viewmodel.currentWeather.weather)}' />
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_height="@dimen/imageSize"
+                            android:layout_width="@dimen/imageSize"
+                            android:src="@{viewmodel.currentWeather.weather, default = @drawable/ic_weather_state_sunny}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="2"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_size_medium"
+                            tools:text="broken clouds"
+                            android:text='@{ViewUtil.getWeatherDescription(viewmodel.currentWeather.weather)}' />
+                    </LinearLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -106,7 +116,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textColor="@android:color/black"
-                            android:textSize="50sp"
+                            android:textSize="@dimen/main_temperature_size"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +148,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:textSize="20sp"
+                            android:textSize="@dimen/text_size_medium"
                             app:degreeValue='@{viewmodel.currentWeather.temp_max}'
                             app:layout_constraintBottom_toTopOf="@+id/bottomvalue"
                             app:layout_constraintTop_toTopOf="parent"
@@ -150,7 +160,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:textSize="20sp"
+                            android:textSize="@dimen/text_size_medium"
                             app:degreeValue='@{viewmodel.currentWeather.temp_min}'
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/uppervalue"
@@ -160,7 +170,7 @@
 
                 </TableRow>
 
-                <TableRow android:layout_marginTop="@dimen/padding_standard">
+                <TableRow android:layout_marginTop="@dimen/spacing_standard">
 
                     <include
                         layout="@layout/state_item"
@@ -184,7 +194,7 @@
                         app:valueText="@{ViewUtil.convertToKilometresPerHour(viewmodel.currentWeather.wind_speed)}" />
                 </TableRow>
 
-                <TableRow android:layout_marginTop="15dp">
+                <TableRow android:layout_marginTop="@dimen/spacing_standard">
 
                     <include
                         layout="@layout/state_item"
@@ -214,45 +224,39 @@
                 layout="@layout/day_prediction"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginBottom="@dimen/padding_standard"
-                app:iconSource='@{@drawable/ic_weather_state_cloudy}'
+                android:layout_margin="@dimen/spacing_standard"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/day2"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/table"
-                app:text='@{"THU, 09"}' />
+                app:dailyWeather='@{viewmodel.dailyWeather1}' />
 
             <include
                 android:id="@+id/day2"
                 layout="@layout/day_prediction"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginBottom="@dimen/padding_standard"
-                app:iconSource='@{@drawable/ic_weather_state_sunny}'
+                android:layout_margin="@dimen/spacing_standard"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/day3"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/day1"
                 app:layout_constraintTop_toBottomOf="@+id/table"
-                app:text='@{"THU, 09"}' />
+                app:dailyWeather='@{viewmodel.dailyWeather2}' />
 
             <include
                 android:id="@+id/day3"
                 layout="@layout/day_prediction"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginBottom="@dimen/padding_standard"
-                app:iconSource='@{@drawable/ic_weather_state_hazy}'
+                android:layout_margin="@dimen/spacing_standard"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/day2"
                 app:layout_constraintTop_toBottomOf="@+id/table"
-                app:text='@{"THU, 09"}' />
+                app:dailyWeather='@{viewmodel.dailyWeather3}' />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

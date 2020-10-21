@@ -5,16 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.cassoviacoders.retrofit.DailyWeatherRetrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import net.aksingh.owmjapis.model.CurrentWeather
 
 
 @Database(
     entities = [
-        Location::class, MyDailyWeather::class, MyCurrentWeather::class
+        Location::class, DailyWeather::class, CurrentWeather::class
     ],
     exportSchema = false,
     version = 1

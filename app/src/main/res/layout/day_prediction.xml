@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
-        <variable
-            name="text"
-            type="java.lang.String" />
+        <import type="com.example.cassoviacoders.utils.ViewUtil" />
 
         <variable
-            name="iconSource"
-            type="android.graphics.drawable.Drawable" />
+            name="dailyWeather"
+            type="com.example.cassoviacoders.db.DailyWeather" />
 
     </data>
 
@@ -22,14 +21,14 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:outlineProvider="bounds"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp">
+        android:paddingTop="@dimen/spacing_standard"
+        android:paddingBottom="@dimen/spacing_standard">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/imageSize"
+            android:layout_height="@dimen/imageSize"
             android:scaleType="fitCenter"
-            android:src='@{iconSource, default = @drawable/ic_weather_state_cloudy}'
+            android:src='@{dailyWeather.weather, default = @drawable/ic_weather_state_sunny}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,65 +36,54 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@{text}"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:text="@{ViewUtil.dailyDate(dailyWeather.dateTime)}"
             android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size_medium"
             tools:text="1.007Mbar" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{text}"
-            tools:text="humidity" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            >
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp">
 
             <TextView
                 android:id="@+id/valueMin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:textSize="12sp"
-                tools:text="33°C"
-                app:degreeValue='@{35}'
-                />
+                android:textSize="@dimen/text_size_small"
+                app:degreeValue='@{dailyWeather.temp_max}'
+                tools:text="33°C" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_height="wrap_content"
                 android:layout_width="8dp"
-                app:srcCompat="@drawable/ic_arrow_up"
-                android:layout_toEndOf="@+id/valueMin"
+                android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/valueMin"
                 android:layout_alignBottom="@+id/valueMin"
+                android:layout_toEndOf="@+id/valueMin"
                 android:scaleType="fitCenter"
-                />
+                app:srcCompat="@drawable/ic_arrow_up" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="32°C"
-                app:degreeValue='@{35.0}'
-                android:textSize="12sp"
                 android:layout_toStartOf="@+id/arrow_down"
-                />
+                android:textSize="12sp"
+                app:degreeValue='@{dailyWeather.temp_min}'
+                tools:text="32°C" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/arrow_down"
-                android:layout_height="wrap_content"
                 android:layout_width="8dp"
-                android:layout_alignParentEnd="true"
-                app:srcCompat="@drawable/ic_arrow_down"
+                android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/valueMin"
                 android:layout_alignBottom="@+id/valueMin"
+                android:layout_alignParentEnd="true"
                 android:scaleType="fitCenter"
-                />
+                app:srcCompat="@drawable/ic_arrow_down" />
 
         </RelativeLayout>
     </LinearLayout>

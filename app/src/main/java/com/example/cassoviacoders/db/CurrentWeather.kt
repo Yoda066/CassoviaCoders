@@ -15,7 +15,7 @@ import java.util.*
         )],
     primaryKeys = ["locId", "dayId"]
 )
-data class MyCurrentWeather(
+data class CurrentWeather(
     //id lokacie predpovede
     var locId: Long,
 

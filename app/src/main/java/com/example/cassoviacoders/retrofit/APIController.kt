@@ -1,27 +1,26 @@
 package com.example.cassoviacoders.retrofit
 
-import android.os.NetworkOnMainThreadException
+import com.example.cassoviacoders.db.CurrentWeather
+import com.example.cassoviacoders.db.DailyWeather
 import com.example.cassoviacoders.db.Location
-import com.example.cassoviacoders.db.MyCurrentWeather
-import com.example.cassoviacoders.db.MyDailyWeather
+import com.example.cassoviacoders.utils.FormatHelper
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 class APIController {
 
-    fun dailyWeatherForLocation(location: Location): List<MyDailyWeather>? {
+    fun dailyWeatherForLocation(location: Location): List<DailyWeather>? {
         val api = weatherApi
 
         val apiCall = api.getDailyForecastByCityCoord(location.lat, location.lon)
 
         val apiResp: Response<DailyForecastResponse>
         try {
-             apiResp = apiCall.execute()
+            apiResp = apiCall.execute()
         } catch (e: Exception) {
             return null
         }
@@ -31,9 +30,9 @@ class APIController {
         //vratim mapu mojuch db objektov
         return weather?.list!!.mapNotNull { t ->
             t?.let {
-                MyDailyWeather(
+                DailyWeather(
                     location.locId,
-                    TimeUnit.MILLISECONDS.toDays(it.dateTime.time).toInt(),
+                    FormatHelper.getDay(it.dateTime.time),
                     t.dateTime,
                     t.weather?.first(),
                     t.temperature?.day,
@@ -44,14 +43,14 @@ class APIController {
         }.toList()
     }
 
-    fun currentWeatherForLocation(location: Location): MyCurrentWeather? {
+    fun currentWeatherForLocation(location: Location): CurrentWeather? {
         val api = weatherApi
 
         val apiCall = api.getCurrentWeatherByCityName(location.title)
 
         val apiResp: Response<CurrentWeatherRetrofit>
         try {
-             apiResp = apiCall.execute()
+            apiResp = apiCall.execute()
         } catch (e: Exception) {
             return null
         }
@@ -63,9 +62,9 @@ class APIController {
         val weather: CurrentWeatherRetrofit? = apiResp.body()
 
         //vratm moj db objekt
-        return MyCurrentWeather(
+        return CurrentWeather(
             location.locId,
-            TimeUnit.MILLISECONDS.toDays(weather?.dateTime?.time ?: 0).toInt(),
+            FormatHelper.getDay(weather?.dateTime?.time ?: 0),
             weather?.dateTime!!,
             weather.weather.first(),
             weather.main.temp,

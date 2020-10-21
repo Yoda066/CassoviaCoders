@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--    corners-->
     <dimen name="corner_radius">35dp</dimen>
     <dimen name="small_corner_radius">15dp</dimen>
 
-    <dimen name="padding_standard">15dp</dimen>
+    <!--    images-->
+    <dimen name="imageSize">30dp</dimen>
+
+    <!--    spacing-->
+    <dimen name="spacing_standard">15dp</dimen>
+    <dimen name="spacing_double">30dp</dimen>
+    <dimen name="spacing_small">5dp</dimen>
+
+    <!--    textsize-->
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_medium">20sp</dimen>
+    <dimen name="main_temperature_size">50sp</dimen>
 </resources>

@@ -1,9 +1,6 @@
 package com.example.cassoviacoders.utils
 
-import com.example.cassoviacoders.db.MyCurrentWeather
-import net.aksingh.owmjapis.model.CurrentWeather
-import net.aksingh.owmjapis.model.param.System
-import net.aksingh.owmjapis.model.param.Weather
+import com.example.cassoviacoders.db.CurrentWeather
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -18,21 +15,13 @@ object ViewUtil {
         return FormatHelper.formatMainDate(time)
     }
 
-//    @JvmStatic
-//    fun getDayTime(systemData: System?): String {
-//        val start = systemData?.sunriseDateTime?.time ?: return ""
-//        val end = systemData.sunsetDateTime?.time ?: return ""
-//
-//        val millis = end - start
-//        return String.format(
-//            "%dh %dm",
-//            TimeUnit.MILLISECONDS.toHours(millis),
-//            TimeUnit.MILLISECONDS.toMinutes(millis) % 60
-//        )
-//    }
+    @JvmStatic
+    fun dailyDate(date: Date?): String {
+        return FormatHelper.formatDailyDate(date)
+    }
 
     @JvmStatic
-    fun getDayTime(systemData: MyCurrentWeather?): String {
+    fun getDayTime(systemData: CurrentWeather?): String {
         val start = systemData?.sunrise?.time ?: return ""
         val end = systemData.sunset.time
 
@@ -57,7 +46,7 @@ object ViewUtil {
     @JvmStatic
     fun getWeatherDescription(weather: com.example.cassoviacoders.retrofit.Weather?): String {
         weather?.let {
-            return it.description
+            return it.main
         }
         return ""
     }
